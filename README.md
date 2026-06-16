@@ -2,6 +2,10 @@
 
 A fully functional, responsive web application for tracking personal carbon emissions with AI-powered analysis, interactive dashboards, and personalized sustainability insights.
 
+## 🌐 Live Demo
+
+The application is deployed and accessible at:
+[https://carbon-footprint-tracker-tau-five.vercel.app/](https://carbon-footprint-tracker-tau-five.vercel.app/)
 ---
 
 ## 📌 Project Overview
