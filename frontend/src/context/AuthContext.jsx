@@ -4,9 +4,9 @@ export const AuthContext = createContext();
 export const ThemeContext = createContext();
 
 // ========== API BASE URL ==========
-// const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 // Temporary hardcode for deployment
-const API_URL = 'https://carbon_footprint_tracker-nzz9.onrender.com';
+//const API_URL = 'https://carbon_footprint_tracker-nzz9.onrender.com';
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
