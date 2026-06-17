@@ -37,3 +37,4 @@ config.zip
 # Database
 data/
 mongodb-data/
+.vercel

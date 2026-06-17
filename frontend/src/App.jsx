@@ -1,3 +1,5 @@
+// this file is the main entry point of the React application. It sets up the routing and context providers for authentication and theme management.
+
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider, ThemeProvider } from './context/AuthContext';

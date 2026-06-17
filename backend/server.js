@@ -15,6 +15,7 @@ const allowedOrigins = new Set(
   [
     process.env.FRONTEND_URL,
     'https://carbon-footprint-tracker-tau-five.vercel.app',
+    'https://carbonfootprinttracker-84ai7cjla-sejaljain208s-projects.vercel.app',
     'http://localhost:3000',
     'http://localhost:5173',
   ].filter(Boolean)
@@ -23,6 +24,7 @@ const allowedOrigins = new Set(
 // ========== CORS MIDDLEWARE (SIRF EK BAAR, SAHI JAGAH) ==========
 app.use(cors({
   origin: (origin, callback) => {
+    // Allow requests with no origin (mobile apps, Postman, etc)
     if (!origin) {
       return callback(null, true);
     }
@@ -31,12 +33,16 @@ app.use(cors({
     const isAllowedLocalOrigin = /^http:\/\/localhost:\d+$/i.test(origin);
 
     if (allowedOrigins.has(origin) || isAllowedVercelOrigin || isAllowedLocalOrigin) {
-      return callback(null, true);
+      callback(null, true);
+    } else {
+      console.warn(`CORS blocked: ${origin}`);
+      callback(new Error(`Not allowed by CORS: ${origin}`));
     }
-
-    return callback(new Error(`Not allowed by CORS: ${origin}`));
   },
   credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  optionsSuccessStatus: 200,
 }));
 
 app.use(express.json());
