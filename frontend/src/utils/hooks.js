@@ -1,12 +1,11 @@
 import { useContext } from 'react';
 import { AuthContext, ThemeContext } from '../context/AuthContext';
+import { getApiBaseUrl } from './apiUrl';
 
 // ========== API BASE URL ==========
 // Production: Render backend URL
 // Development: localhost
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-
-console.log('API_URL:', API_URL); // Check karo ki sahi URL use ho rahi hai
+const API_URL = getApiBaseUrl();
 
 export const useAuth = () => {
   const context = useContext(AuthContext);

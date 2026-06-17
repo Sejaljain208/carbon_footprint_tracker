@@ -11,9 +11,31 @@ const reportRoutes = require('./routes/reports');
 
 const app = express();
 
+const allowedOrigins = new Set(
+  [
+    process.env.FRONTEND_URL,
+    'https://carbon-footprint-tracker-tau-five.vercel.app',
+    'http://localhost:3000',
+    'http://localhost:5173',
+  ].filter(Boolean)
+);
+
 // ========== CORS MIDDLEWARE (SIRF EK BAAR, SAHI JAGAH) ==========
 app.use(cors({
-  origin: ['https://carbon-footprint-tracker-tau-five.vercel.app', 'http://localhost:3000', 'http://localhost:5173'],
+  origin: (origin, callback) => {
+    if (!origin) {
+      return callback(null, true);
+    }
+
+    const isAllowedVercelOrigin = /^https:\/\/[a-z0-9-]+\.vercel\.app$/i.test(origin);
+    const isAllowedLocalOrigin = /^http:\/\/localhost:\d+$/i.test(origin);
+
+    if (allowedOrigins.has(origin) || isAllowedVercelOrigin || isAllowedLocalOrigin) {
+      return callback(null, true);
+    }
+
+    return callback(new Error(`Not allowed by CORS: ${origin}`));
+  },
   credentials: true,
 }));
 
